@@ -58,8 +58,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="productmanager.jsp" class="nav-link text-white" aria-current="page" target="test">
-                    <i class="bi bi-box-seam-fill"></i> 상품관리
+                <a href="../admin_orderlist/productmanager.jsp" class="nav-link text-white" aria-current="page" target="test">
+                    <i class="bi bi-box-seam-fill me-2"></i> 상품관리
                 </a>
             </li>
             <li class="nav-item">
@@ -68,12 +68,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-white" target="test">
+                <a href="../order/ordermanager.jsp" class="nav-link text-white" target="test">
                     <i class="bi bi-cart me-2"></i> 주문관리
                 </a>
             </li>
             <li class="nav-item">
-                <a href="" class="nav-link text-white" target="test">
+                <a href="../delivery/deliverymanager.jsp" class="nav-link text-white" target="test">
                     <i class="bi bi-truck me-2"></i> 배송관리
                 </a>
             </li>

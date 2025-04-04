@@ -1,10 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <title>AdminLogin</title>
+<link rel="stylesheet" type="text/css" href="../css/style.css">
 
 <script type="text/javascript">
 window.onload = function(){
@@ -35,7 +36,7 @@ function funcAdminHome(){
 </head>
 <body>
 <form action="adminloginproc.jsp" name="adminLoginForm" method="post">
-<table style="width: 300px">
+<table style="width: 300">
   <tr>
   	<td colspan="2">
   		<h2>Admin Login</h2>
@@ -47,7 +48,7 @@ function funcAdminHome(){
   </tr>
   <tr>
   	<td>Password</td>
-  	<td><input type="text" name="admin_passwd"></td>
+  	<td><input type="password" name="admin_passwd"></td>
   </tr>
   <tr>
   	<td colspan="2">

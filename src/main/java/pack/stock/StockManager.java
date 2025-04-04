@@ -28,7 +28,7 @@ public class StockManager {
 
         try {
             conn = ds.getConnection();
-            String sql = "SELECT stock_no, productnum, productname, productquantity, releasedate, createdate FROM stock JOIN product ON product_no=productnum";
+            String sql = "SELECT stock_no, productnum, productname, productquantity, createdate, lastmodifieddate FROM stock JOIN product ON product_no=productnum";
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -37,8 +37,8 @@ public class StockManager {
                 stockDto.setProduct_no(rs.getInt("productnum"));
                 stockDto.setProduct_name(rs.getString("productname"));
                 stockDto.setProduct_quantity(rs.getInt("productquantity"));
-                stockDto.setRelease_date(rs.getTimestamp("releasedate"));
                 stockDto.setCreate_date(rs.getTimestamp("createdate"));
+                stockDto.setLastmodified_date(rs.getTimestamp("lastmodifieddate"));
                 list.add(stockDto);
             }
         } catch (Exception e) {
@@ -60,7 +60,7 @@ public class StockManager {
 
         try {
             conn = ds.getConnection();
-            String sql = "SELECT stock_no, productnum, productname, productquantity, releasedate, createdate FROM stock JOIN product ON product_no=productnum";
+            String sql = "SELECT stock_no, productnum, productname, productquantity, createdate, lastmodifieddate FROM stock JOIN product ON product_no=productnum";
             sql += " where productname like ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, "%" + keyword + "%"); // 일부 검색 가능하게 설정
@@ -72,8 +72,8 @@ public class StockManager {
                 dto.setProduct_no(rs.getInt("productnum"));
                 dto.setProduct_name(rs.getString("productname"));
                 dto.setProduct_quantity(rs.getInt("productquantity"));
-                dto.setRelease_date(rs.getTimestamp("releasedate"));
                 dto.setCreate_date(rs.getTimestamp("createdate"));
+                dto.setLastmodified_date(rs.getTimestamp("lastmodifieddate"));
                 list.add(dto);
             }
         } catch (Exception e) {
@@ -96,8 +96,8 @@ public class StockManager {
 
         try {
             conn = ds.getConnection();
-            String sql = "SELECT stock_no, productnum, productname, productquantity, releasedate, createdate " +
-                    "FROM stock JOIN product ON product_no = productnum WHERE stock_no = ?";
+            String sql = "SELECT stock_no, productnum, productname, productquantity, createdate, lastmodifieddate" +
+                    " FROM stock JOIN product ON product_no = productnum WHERE stock_no = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, stockNo);
             rs = pstmt.executeQuery();
@@ -108,8 +108,8 @@ public class StockManager {
                 dto.setProduct_no(rs.getInt("productnum"));
                 dto.setProduct_name(rs.getString("productname"));
                 dto.setProduct_quantity(rs.getInt("productquantity"));
-                dto.setRelease_date(rs.getTimestamp("releasedate"));
                 dto.setCreate_date(rs.getTimestamp("createdate"));
+                dto.setLastmodified_date(rs.getTimestamp("lastmodifieddate"));
             }
         } catch (Exception e) {
             System.out.println("getStockByNo err : " + e);
@@ -131,7 +131,7 @@ public class StockManager {
 
         try {
             conn = ds.getConnection();
-            String sql = "UPDATE stock SET productquantity = ?, createdate = NOW() WHERE stock_no = ?";
+            String sql = "UPDATE stock SET productquantity = ?, lastmodifieddate = NOW() WHERE stock_no = ?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, quantity);
             pstmt.setInt(2, stockNo);
@@ -151,5 +151,29 @@ public class StockManager {
         return result;
     }
 
+    public boolean insertStock(int product_no) {
+        boolean result = false;
+
+        try {
+            conn = ds.getConnection();
+            String sql = "insert into stock(productnum, productquantity, createdate, lastmodifieddate)"
+            		+ " values(?,0,now(),now())";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, product_no);
+            result = pstmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("updateStockQuantity err : " + e);
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e2) {
+                System.out.println("closing err : " + e2);
+            }
+        }
+
+        return result;
+    }
 
 }

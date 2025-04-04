@@ -58,8 +58,8 @@
         <td><%=dto.getProduct_no()%></td>
         <td><%=dto.getProduct_name()%></td>
         <td><%=dto.getProduct_quantity()%></td>
-        <td><%=dto.getRelease_date().toString().substring(0,19)%></td>
         <td><%=dto.getCreate_date().toString().substring(0,19)%></td>
+        <td><%=dto.getLastmodified_date().toString().substring(0,19)%></td>
         <td><a href="admin_stock_update.jsp?Stock=<%=dto.getStock_no()%>">상품 수정</a></td>
     </tr>
     <%

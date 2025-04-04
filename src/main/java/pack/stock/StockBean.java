@@ -11,5 +11,5 @@ import java.util.Date;
 public class StockBean {
     private int stock_no, product_no,product_quantity;
     private String product_name;
-    private Timestamp release_date, create_date;
+    private Timestamp create_date, lastmodified_date;
 }

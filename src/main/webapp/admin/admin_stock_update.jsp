@@ -35,10 +35,10 @@
     <input type="number" name="product_quantity" value="<%= stockDto.getProduct_quantity() %>" required />
 
     <label>입고일</label>
-    <input type="text" name="release_date" value="<%= stockDto.getRelease_date().toString().substring(0,19) %>" readonly />
+    <input type="text" name="create_date" value="<%= stockDto.getCreate_date().toString().substring(0,19) %>" readonly />
 
     <label>최근 수정일</label>
-    <input type="text" name="create_date" value="<%= stockDto.getCreate_date().toString().substring(0,19) %>" readonly />
+    <input type="text" name="release_date" value="<%= stockDto.getLastmodified_date().toString().substring(0,19) %>" readonly />
 
     <input type="submit" value="수정 완료" />
 </form>
