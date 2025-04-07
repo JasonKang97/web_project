@@ -21,11 +21,12 @@
 <html>
 <head>
     <title>나의 배송 조회</title>
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/common2.css">
 </head>
 <body>
-<h2>나의 배송 내역</h2>
-<table border="1">
+<div class="page-container">
+<h2 class="section-title">나의 배송 내역</h2>
+<table border="1" class="basic-table">
 <tr>
     <th>주문번호</th><th>상품명</th><th>수량</th><th>주문일</th>
     <th>배송상태</th><th>송장번호</th><th>주소</th>
@@ -33,7 +34,7 @@
 <c:forEach var="d" items="${deliveryList}">
 <tr>
     <td>${d.order_no}</td>
-    <td><a href="../guest/guest_productdetail.jsp?product_no=${d.order_no}">${d.product_name}</a></td>
+    <td><a href="../guest/guest_productdetail.jsp?product_no=${d.order_no}" class="pagination-box">${d.product_name}</a></td>
     <td>${d.order_quantity}</td>
     <td>${d.order_date}</td>
     <td>
@@ -50,6 +51,7 @@
 </tr>
 </c:forEach>
 </table>
+</div>
 </body>
 </html>
 

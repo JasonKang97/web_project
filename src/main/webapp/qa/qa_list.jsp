@@ -49,7 +49,7 @@
             <c:choose>
                 <c:when test="${empty loginId}">
                     <form action="login.jsp" method="get">
-                        <button type="submit">관리자 로그인</button>
+                        <button type="submit" class="detail-button">관리자 로그인</button>
                     </form>
                 </c:when>
                 <c:otherwise>
@@ -79,7 +79,7 @@
                 <td>
                     <form method="post" action="${dto.secretYN == 1 && !isAdmin ? 'qa_check.jsp' : 'qa_detail.jsp'}">
                         <input type="hidden" name="no" value="${dto.publish_no}" />
-                        <button type="submit" class="title-btn">
+                        <button type="submit" class="title-btn detail-button">
                             <c:if test="${dto.secretYN == 1}"><i class="bi bi-lock-fill text-info"></i></c:if>
                                 ${dto.title}
                         </button>
