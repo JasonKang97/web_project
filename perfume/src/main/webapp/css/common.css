@@ -1,0 +1,125 @@
+@charset "UTF-8";
+
+/* 전체 폰트와 기본 배경 */
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background-color: #fff;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* 로고 */
+.logo-area {
+  font-size: 1.8rem;
+  font-family: 'Georgia', serif;
+  color: #333;
+  letter-spacing: 1.5px;
+}
+
+/* 오른쪽 상단 아이콘 */
+.header-icons i {
+  font-size: 1.3rem;
+  color: #222;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+.header-icons i:hover {
+  transform: scale(1.1);
+  color: #8c5c39;
+}
+
+/* 중앙 메뉴 드롭다운 */
+.navbar .nav-item.dropdown {
+  position: relative;
+}
+.navbar .nav-item .dropdown-menu {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.25s ease;
+}
+.navbar .nav-item.dropdown:hover .dropdown-menu,
+.navbar .nav-item .dropdown-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 드롭다운 공통 */
+.dropdown-menu {
+  background: white;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  min-width: 140px;
+  font-size: 0.95rem;
+  z-index: 1050;
+}
+
+/* 사용자 드롭다운 */
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  transform: none;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  min-width: 180px;
+  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+}
+.user-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* 검색창 슬라이드 */
+.slide-search {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  z-index: 1060;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.slide-search.active {
+  display: flex;
+  animation: slideDown 0.3s ease-out forwards;
+}
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+.slide-search .close-btn {
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #999;
+}
+.slide-search .close-btn:hover {
+  color: #444;
+}
+/* 메뉴 텍스트: 검은색, 두껍게 */
+.navbar .nav-link {
+  color: #000 !important;
+  font-weight: bold;
+}
+
+/* 드롭다운 화살표 제거 */
+.nav-link.dropdown-toggle::after {
+  display: none !important;
+}

@@ -1,0 +1,163 @@
+@charset "UTF-8";
+
+/* 전체 컨테이너 */
+.page-container {
+  max-width: 1200px;
+  width: 95%;
+  margin: 60px auto;
+  padding: 40px 30px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #4b3b3b;
+  animation: fadeInUp 0.8s ease-in-out;
+}
+
+/* 타이틀 */
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #4b3b3b;
+  padding-bottom: 12px;
+  border-bottom: 3px solid #fefae0;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background: #fefae0;
+  margin-top: 5px;
+  border-radius: 2px;
+}
+
+/* 상단 영역 */
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+/* 검색폼 */
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 14px;
+  align-items: center;
+  background: #fefae0;
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 1px solid #fefae0;
+}
+
+.search-form input[type="text"] {
+  padding: 10px 15px;
+  border: 1px solid #fefae0;
+  border-radius: 8px;
+}
+
+.search-form button {
+  background: #fefae0;
+  border: none;
+  color: #4b3b3b;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-form button:hover {
+  background-color: #f3f0d2;
+}
+
+/* 테이블 */
+.basic-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.basic-table th {
+  text-align: center;
+  background-color: #fefae0;
+  color: #4b3b3b;
+  padding: 16px 14px;
+  font-weight: bold;
+  border-bottom: 2px solid #fefae0;
+}
+
+.basic-table td {
+  background-color: #ffffff;
+  padding: 16px 14px;
+  border-bottom: 1px solid #fefae0;
+  text-align: center;
+  animation: fadeRow 0.6s ease both;
+}
+
+.basic-table tr:hover td {
+  background-color: #fefae0;
+}
+
+/* 페이지네이션 */
+.pagination-box {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.pagination-box button {
+  background-color: #ffffff;
+  color: #4b3b3b;
+  border: 1px solid #fefae0;
+  padding: 8px 14px;
+  margin: 0 4px;
+  border-radius: 6px;
+}
+
+.pagination-box button.active,
+.pagination-box button:hover {
+  background-color: #fefae0;
+  color: #4b3b3b;
+}
+
+/* 버튼 박스 */
+.action-button-box {
+  text-align: right;
+  margin-top: 40px;
+  padding-right: 10px;
+}
+
+.action-button-box button {
+  background: #fefae0;
+  padding: 10px 24px;
+  border: none;
+  color: #4b3b3b;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  animation: popIn 0.6s ease-out;
+}
+
+.action-button-box button:hover {
+  background: #f3f0d2;
+  color: #4b3b3b;
+}
+
+.detail-button {
+  background: #fefae0;
+  padding: 8px 18px;
+  border: none;
+  color: #4b3b3b;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: 0.3s ease;
+  font-size: 14px;
+}
+
+.detail-button:hover {
+  background: #f3f0d2;
+  color: #4b3b3b;
+}

@@ -1,0 +1,142 @@
+/* 관리자 페이지 공통 스타일 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin: 20px 0;
+}
+
+/* 네비게이션 바 스타일 */
+.navbar {
+    background-color: #343a40;
+    padding: 10px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+.navbar a:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #343a40;
+    color: white;
+    padding: 15px;
+    position: fixed;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+}
+
+.sidebar a:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 90%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: #343a40;
+    color: white;
+}
+
+/* 폼 스타일 */
+form {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input[type="text"], input[type="password"], input[type="date"], input[type="number"], textarea, select {
+    width: calc(100% - 20px);
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+input[type="submit"], input[type="reset"], input[type="button"], button {
+    background-color: #343a40;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover, input[type="button"]:hover, button:hover {
+    background-color: #495057;
+}
+
+/* 이미지 스타일 */
+img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #007bff; /* 파란색 배경 */
+    padding: 10px 15px;
+    border-radius: 5px;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+a:hover {
+    background-color: #0056b3; /* 호버 시 더 어두운 파란색 */
+}
+
+.btn-container {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+input[type="text"].input_id, select {
+	width:40%;
+}
+
+input[type="text"].postcode {
+	width:80%;
+}
