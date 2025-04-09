@@ -1,13 +1,15 @@
 <%@page import="pack.product.ProductDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="productManager" class="pack.product.ProductManager"/>
 
 <%
 String product_no = request.getParameter("product_no");
 
 ProductDto productDto = productManager.getProduct(product_no);
+
+
 
 %>
  
@@ -69,7 +71,9 @@ ProductDto productDto = productManager.getProduct(product_no);
 	</tr>
 	<tr>
 		<td colspan="3">
-			<input type="submit" value="카트에 담기">&nbsp;&nbsp;&nbsp;
+			<c:if test="${session.getAttribute('user_no')}">
+				<input type="submit" value="카트에 담기">&nbsp;&nbsp;&nbsp;
+			</c:if>
 			<input type="button" onclick="history.back()" value="돌아가기">
 		</td>
 	</tr>

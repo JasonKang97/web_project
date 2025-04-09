@@ -3,6 +3,7 @@
 <%@ page pageEncoding="UTF-8" %>
 <jsp:useBean id="cartManager" class="pack.cart.CartManager" scope="session"/>
 <jsp:useBean id="stockManager" class="pack.stock.StockManager"/>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%
     int user_no;
@@ -74,10 +75,11 @@
         </table>
 
         <input type="hidden" name="user_no" value="<%=user_no%>">
-
+        <c:if test="${user_no}">
         <div class="action-button-box">
             <button type="submit">결제하기</button>
         </div>
+        </c:if>
     </form>
 </div>
 
