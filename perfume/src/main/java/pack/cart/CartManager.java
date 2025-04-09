@@ -123,4 +123,25 @@ public class CartManager {
 		return b;
 
     }
+    
+    public boolean deleteAll(int user_no) {
+        boolean success = false;
+        try {
+            conn = ds.getConnection();
+            String sql = "DELETE FROM cart WHERE user_no = ?";
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, user_no);
+            success = pstmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.out.println("deleteAll err : " + e);
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e2) {
+                System.out.println("deleteAll close err : " + e2);
+            }
+        }
+        return success;
+    }
 }

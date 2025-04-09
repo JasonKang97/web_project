@@ -22,13 +22,18 @@
     <meta charset="UTF-8">
     <title>고객:상품주문</title>
     <link rel="stylesheet" type="text/css" href="../css/common2.css">
+    <script>
+    	function cartDelete(){
+    		location.href="cartDelete.jsp";
+    	}
+    </script>
 </head>
 <body>
 
 <div class="page-container">
     <h2 class="section-title">장바구니</h2>
 
-    <form action="orderproc.jsp" method="get">
+    <form action="orderproc.jsp" method="get" name="cartFrm">
         <table class="basic-table">
             <thead>
             <tr>
@@ -78,6 +83,7 @@
         <%if(user_no == 0){
          }else{%>
         <div class="action-button-box">
+            <button type="button" onclick="javascript:cartDelete()">장바구니 삭제</button>
             <button type="submit">결제하기</button>
         </div>
         <%} %>
