@@ -32,7 +32,7 @@
     <input type="text" name="product_name" value="<%= stockDto.getProduct_name() %>" readonly />
 
     <label>재고 수량</label>
-    <input type="number" name="product_quantity" value="<%= stockDto.getProduct_quantity() %>" required />
+    <input type="number" name="product_quantity" value="<%= stockDto.getProduct_quantity() %>" required min="0"/>
 
     <label>입고일</label>
     <input type="text" name="create_date" value="<%= stockDto.getCreate_date().toString().substring(0,19) %>" readonly />
