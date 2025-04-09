@@ -36,28 +36,12 @@ function cancelToListPage() {
     }
 }
 
-// ✅ 수정 페이지에서 "취소" → 목록으로 이동
-function cancelEditToList() {
-    const cancelBtn = document.getElementById("editCancelBtn");
-    if (cancelBtn) {
-        cancelBtn.onclick = function () {
-            location.href = "qa_list.jsp";
-        };
-    }
-}
-
 // ✅ 삭제 확인 → 확인 누르면 삭제 form 전송
 function confirmDelete() {
     const confirmed = confirm("정말 삭제하시겠습니까?");
     if (confirmed) {
         document.forms["deleteForm"].submit(); // name="deleteForm"인 form 전송
     }
-}
-
-// ✅ 비밀번호 불일치 알림 (qa_deleteproc.jsp 등에서 호출)
-function alertPasswordMismatch() {
-    alert("비밀번호가 일치하지 않습니다.");
-    history.back();
 }
 
 // ✅ 관리자 답글 작성 중 취소 시 → 상세보기 페이지로 이동
