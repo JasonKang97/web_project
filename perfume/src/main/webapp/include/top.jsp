@@ -22,7 +22,9 @@
 <header class="sticky-top bg-white shadow-sm z-3">
   <div class="container-fluid d-flex align-items-center justify-content-between py-3 px-4">
     <div class="d-none d-lg-block" style="width: 180px;"></div>
-    <div class="logo-area text-center flex-grow-1">AromaDesk</div>
+    <div class="logo-area text-center flex-grow-1">
+  		<a href="../od/odeur_main.jsp" class="text-decoration-none text-dark">AromaDesk</a>
+	</div>
 
     <div class="d-flex align-items-center gap-4 header-icons">
       <i class="fa fa-search" onclick="toggleSearchBox()" title="검색"></i>
