@@ -17,18 +17,10 @@
   font-weight: 700;
   margin-bottom: 30px;
   color: #4b3b3b;
-  padding-bottom: 12px;
-  border-bottom: 3px solid #fefae0;
 }
 
 .section-title::after {
-  content: '';
-  display: block;
-  width: 80px;
-  height: 4px;
-  background: #fefae0;
-  margin-top: 5px;
-  border-radius: 2px;
+  display: none;
 }
 
 /* 상단 영역 */

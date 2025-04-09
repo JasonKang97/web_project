@@ -5,7 +5,7 @@
 <%
     String no = request.getParameter("no"); // 게시글 번호
     String mode = request.getParameter("mode"); // 동작 모드 (edit or delete)
-    String action = "qa_detail.jsp";
+    String action = "qa_checkproc.jsp";
     if ("edit".equals(mode)) action = "qa_edit.jsp";
     else if ("delete".equals(mode)) action = "qa_delete.jsp";
 %>
