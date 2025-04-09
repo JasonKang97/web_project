@@ -1,60 +1,67 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="java.util.List" %>
-<%@ page import="pack.delivery.DeliveryManager" %>
-<%@ page import="pack.delivery.DeliveryBean" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-
-<jsp:useBean id="deliveryManager" class="pack.delivery.DeliveryManager" />
-<jsp:useBean id="dbean" class="pack.delivery.DeliveryBean" />
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ page import="org.apache.ibatis.session.SqlSession" %>
+<%@ page import="pack.mybatis.SqlMapConfig" %>
+<%@ page import="pack.mybatis.DeliveryMapper" %>
+<%@ page import="pack.delivery.DeliveryBean" %>
+<%@ page import="java.util.*" %>
 
 <%
-    List<DeliveryBean> list = deliveryManager.getDeliveryDetail();
-    request.setAttribute("list", list);
+    SqlSession sqlSession = SqlMapConfig.getSqlSessionFactory().openSession();
+    DeliveryMapper mapper = sqlSession.getMapper(DeliveryMapper.class);
+    List<DeliveryBean> list = mapper.selectAll();
+    sqlSession.close();
+
+    request.setAttribute("deliverylist", list);
 %>
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<h2>배송 목록(관리자)</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
+
+<html>
+<head>
+    <title>배송관리</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<h2>배송 관리 페이지</h2>
+<table border="1">
+    <tr>
+        <th>주문번호</th>
+        <th>회원번호</th>
+        <th>받는사람</th>
+        <th>상품명</th>
+        <th>배송상태</th>
+        <th>배송시작일</th>
+        <th>수정</th>
+    </tr>
+    <c:forEach var="dbean" items="${deliverylist}">
         <tr>
-            <th>주문번호</th>
-            <th>고객명</th>
-            <th>상품명</th>
-            <th>배송상태</th>
-            <th>배송시작일</th>
-            <th>배송주소</th>
-            <th>수정</th>
+            <td><c:out value="${dbean.order_no}"/></td>
+            <td><c:out value="${dbean.usern_no}"/></td>
+            <td><c:out value="${dbean.username}"/></td>
+            <td><c:out value="${dbean.productname}"/></td>
+            <td>
+                <c:choose>
+                    <c:when test="${dbean.deliverystatus == 0}">주문 취소</c:when>
+                    <c:when test="${dbean.deliverystatus == 1}">관리자 확인</c:when>
+                    <c:when test="${dbean.deliverystatus == 2}">상품 준비중</c:when>
+                    <c:when test="${dbean.deliverystatus == 3}">배송중</c:when>
+                    <c:when test="${dbean.deliverystatus == 4}">배송완료</c:when>
+                    <c:otherwise>기타</c:otherwise>
+                </c:choose>
+            </td>
+            <td>
+                <c:choose>
+                    <c:when test="${not empty dbean.shippingdate}">
+                        <fmt:formatDate value="${dbean.shippingdate}" pattern="yyyy-MM-dd"/>
+                    </c:when>
+                    <c:otherwise>-</c:otherwise>
+                </c:choose>
+            </td>
+            <td>
+                <a href="deliveryupdate.jsp?ordernumber=${dbean.order_no}">수정</a>
+            </td>
         </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="row" items="${list}">
-            <tr>
-                <td>${row.ordernumber}</td>
-                <td>${row.username}</td>
-                <td>${row.productname}</td>
-                <td>
-                    <c:choose>
-                    	<c:when test="${row.deliverystatus == 0}">주문 취소</c:when>
-                        <c:when test="${row.deliverystatus == 1}">관리자 확인 전</c:when>
-                        <c:when test="${row.deliverystatus == 2}">상품 준비중</c:when>
-                        <c:when test="${row.deliverystatus == 3}">배송중</c:when>
-                        <c:when test="${row.deliverystatus == 4}">배송 완료</c:when>
-                        <c:otherwise>알 수 없음</c:otherwise>
-                    </c:choose>
-                </td>
-                <td>
-                    <c:choose>
-                        <c:when test="${row.shippingdate != null}">
-                            ${fn:substring(row.shippingdate, 0, 10)}
-                        </c:when>
-                        <c:otherwise>-</c:otherwise>
-                    </c:choose>
-                </td>
-                <td>${row.shpaddress} ${row.shpdetailaddress}</td>
-                <td><a href="deliveryupdate.jsp?ordernumber=${row.ordernumber}">수정</a></td>
-            </tr>
-        </c:forEach>
-    </tbody>
+    </c:forEach>
 </table>
-
-
+</body>
+</html>

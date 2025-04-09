@@ -71,9 +71,7 @@ ProductDto productDto = productManager.getProduct(product_no);
 	</tr>
 	<tr>
 		<td colspan="3">
-			<c:if test="${session.getAttribute('user_no')}">
-				<input type="submit" value="카트에 담기">&nbsp;&nbsp;&nbsp;
-			</c:if>
+			<input type="submit" value="카트에 담기">&nbsp;&nbsp;&nbsp;
 			<input type="button" onclick="history.back()" value="돌아가기">
 		</td>
 	</tr>

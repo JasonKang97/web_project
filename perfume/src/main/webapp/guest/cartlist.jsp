@@ -75,11 +75,12 @@
         </table>
 
         <input type="hidden" name="user_no" value="<%=user_no%>">
-        <c:if test="${user_no}">
+        <%if(user_no == 0){
+         }else{%>
         <div class="action-button-box">
             <button type="submit">결제하기</button>
         </div>
-        </c:if>
+        <%} %>
     </form>
 </div>
 

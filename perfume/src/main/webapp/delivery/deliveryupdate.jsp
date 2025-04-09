@@ -1,76 +1,109 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ page import="org.apache.ibatis.session.SqlSession" %>
+<%@ page import="org.apache.ibatis.session.SqlSessionFactory" %>
+<%@ page import="pack.mybatis.SqlMapConfig" %>
+<%@ page import="pack.mybatis.DeliveryMapper" %>
 <%@ page import="pack.delivery.DeliveryBean" %>
-<%@ page import="pack.delivery.DeliveryManager" %>
-
-<jsp:useBean id="dbean" class="pack.delivery.DeliveryBean" />
-<jsp:useBean id="deliveryManager" class="pack.delivery.DeliveryManager" />
 
 <%
-    String orderid = request.getParameter("ordernumber");
-    if (orderid != null) {
-        dbean = deliveryManager.getDeliveryInfo(Integer.parseInt(orderid));
-        request.setAttribute("dbean", dbean);
+    int ordernumber = Integer.parseInt(request.getParameter("ordernumber"));
+    SqlSessionFactory factory = SqlMapConfig.getSqlSessionFactory();
+    SqlSession sqlSession = factory.openSession();
+    DeliveryMapper mapper = sqlSession.getMapper(DeliveryMapper.class);
+    DeliveryBean bean = mapper.selectOne(ordernumber);
+    sqlSession.close();
+
+    if (bean == null) {
+        out.println("<script>alert('배송 정보를 찾을 수 없습니다.'); history.back();</script>");
+        return;
     }
+
+    request.setAttribute("delivery", bean);
 %>
 
-<%
-    if (dbean == null) {
-%>
-    <p>해당 배송 정보를 찾을 수 없습니다.</p>
-    <p><a href="deliverymanager.jsp">← 돌아가기</a></p>
-<%
-    } else {
-%>
-<link rel="stylesheet" type="text/css" href="../css/style.css">
-<h2>배송 상태 수정</h2>
-<form method="post" action="deliveryupdate_proc.jsp">
-    <input type="hidden" name="ordernumber" value="<%= dbean.getOrdernumber() %>" />
-    <input type="hidden" name="prevStatus" id="prevStatus" value="<%= dbean.getDeliverystatus() %>" />
-    <input type="hidden" name="shippingdate" id="shippingdate" value="" />
+<html>
+<head>
+    <title>배송 상태 수정</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <p>고객명: <%= dbean.getUsername() %></p>
-    <p>상품명: <%= dbean.getProductname() %></p>
-    <p>운송장번호: <%= dbean.getTrackingnumber() %></p>
-    <p>배송주소: <%= dbean.getShpaddress() %> <%= dbean.getShpdetailaddress() %></p>
+    <script>
+        let prevStatus;
 
-    <p>배송 상태:
-        <select name="newStatus" id="newStatus" onchange="handleChange()">
-            <option value="1" <%= dbean.getDeliverystatus() == 1 ? "selected" : "" %>>관리자 확인 전</option>
-            <option value="2" <%= dbean.getDeliverystatus() == 2 ? "selected" : "" %>>상품 준비중</option>
-            <option value="3" <%= dbean.getDeliverystatus() == 3 ? "selected" : "" %>>배송중</option>
-            <option value="4" <%= dbean.getDeliverystatus() == 4 ? "selected" : "" %>>배송 완료</option>
+        window.onload = () => {
+            prevStatus = parseInt(document.getElementById("prevstatus").value);
+        };
+
+        function checkDeliveryStatusChange(e) {
+            const newStatus = parseInt(document.getElementById("deliverystatus").value);
+            if (newStatus < prevStatus) {
+                const myModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                myModal.show();
+                return false;
+            }
+            return true;
+        }
+
+        function proceedSubmit() {
+            document.getElementById("updateForm").submit();
+        }
+    </script>
+</head>
+<body class="container">
+<h2 class="mt-4 mb-3">배송 상태 수정</h2>
+
+<form id="updateForm" action="deliveryupdate_proc.jsp" method="post" onsubmit="return checkDeliveryStatusChange(event);">
+    <input type="hidden" name="ordernumber" value="${delivery.order_no}" />
+    <input type="hidden" id="prevstatus" name="prevstatus" value="${delivery.deliverystatus}" />
+
+    <div class="mb-2">고객명: <strong>${delivery.username}</strong></div>
+    <div class="mb-2">상품명: <strong>${delivery.productname}</strong></div>
+
+    <div class="mb-2">배송시작일:
+        <c:choose>
+            <c:when test="${not empty delivery.shippingdate}">
+                <fmt:formatDate value="${delivery.shippingdate}" pattern="yyyy-MM-dd"/>
+            </c:when>
+            <c:otherwise>-</c:otherwise>
+        </c:choose>
+    </div>
+
+    <div class="mb-3">
+        <label for="deliverystatus" class="form-label">배송 상태 변경:</label>
+        <select class="form-select" id="deliverystatus" name="deliverystatus">
+            <option value="0" ${delivery.deliverystatus == 0 ? 'selected' : ''}>주문 취소</option>
+            <option value="1" ${delivery.deliverystatus == 1 ? 'selected' : ''}>관리자 확인 중</option>
+            <option value="2" ${delivery.deliverystatus == 2 ? 'selected' : ''}>상품 준비중</option>
+            <option value="3" ${delivery.deliverystatus == 3 ? 'selected' : ''}>배송중</option>
+            <option value="4" ${delivery.deliverystatus == 4 ? 'selected' : ''}>배송완료</option>
         </select>
-    </p>
+    </div>
 
-    <input type="submit" value="변경 저장" />
+    <button type="submit" class="btn btn-primary">수정 완료</button>
 </form>
 
-<script>
-    const prev = document.getElementById("prevStatus").value;
+<!-- ✅ Bootstrap 확인용 모달 -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">상태 되돌림 확인</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="닫기"></button>
+      </div>
+      <div class="modal-body">
+        현재 상태보다 낮은 단계로 변경하려고 합니다.<br>정말 진행하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger" onclick="proceedSubmit();">변경 계속</button>
+      </div>
+    </div>
+  </div>
+</div>
 
-    function handleChange() {
-        const sel = document.getElementById("newStatus");
-        const newVal = sel.value;
-
-        // 단계 하락 시 확인 팝업
-        if (parseInt(newVal) < parseInt(prev)) {
-            if (!confirm("정말 이전 단계로 변경하시겠습니까?")) {
-                sel.value = prev;
-                return;
-            }
-        }
-
-        // 3번 배송중으로 변경 시 날짜 설정 (YYYY-MM-DD)
-        if (parseInt(newVal) === 3 && parseInt(prev) !== 3) {
-            const now = new Date();
-            const dateOnly = now.toISOString().slice(0, 10); // 'YYYY-MM-DD'
-            document.getElementById("shippingdate").value = dateOnly;
-        } else {
-            document.getElementById("shippingdate").value = "";
-        }
-    }
-</script>
-
-<%
-    } // dbean != null
-%>
+</body>
+</html>

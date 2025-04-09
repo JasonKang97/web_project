@@ -1,37 +1,47 @@
-<%@ page contentType="text/html; charset=UTF-8" %>
-<%@ page import="pack.delivery.DeliveryManager" %>
-
-<jsp:useBean id="deliveryManager" class="pack.delivery.DeliveryManager" />
+<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.sql.Timestamp" %>
+<%@ page import="org.apache.ibatis.session.SqlSession" %>
+<%@ page import="pack.mybatis.SqlMapConfig" %>
+<%@ page import="pack.mybatis.DeliveryMapper" %>
+<%@ page import="pack.delivery.DeliveryBean" %>
 
 <%
     request.setCharacterEncoding("UTF-8");
 
-    String ordernumberStr = request.getParameter("ordernumber");
-    String newStatusStr = request.getParameter("newStatus");
-    String shippingdate = request.getParameter("shippingdate");
+    int order_no = Integer.parseInt(request.getParameter("ordernumber"));
+    int deliverystatus = Integer.parseInt(request.getParameter("deliverystatus"));
 
-    int ordernumber = 0;
-    int newStatus = 0;
+    SqlSession sqlSession = SqlMapConfig.getSqlSessionFactory().openSession();
+    DeliveryMapper mapper = sqlSession.getMapper(DeliveryMapper.class);
 
-    boolean updateResult = false;
+    DeliveryBean bean = new DeliveryBean();
+    bean.setOrder_no(order_no);
+    bean.setDeliverystatus(deliverystatus);
 
-    try {
-        ordernumber = Integer.parseInt(ordernumberStr);
-        newStatus = Integer.parseInt(newStatusStr);
-
-        // 배송상태가 3번(배송중)이고 날짜도 넘어온 경우만 날짜 포함 업데이트
-        if (newStatus == 3 && shippingdate != null && !shippingdate.trim().equals("")) {
-            updateResult = deliveryManager.updateStatus(ordernumber, newStatus, shippingdate);
-        } else {
-            updateResult = deliveryManager.updateStatus(ordernumber, newStatus, null);
-        }
-
-    } catch (Exception e) {
-        System.out.println("처리 중 오류 발생: " + e.getMessage());
+    // 배송중이면 시작일 설정, 아닐 경우 null
+    if (deliverystatus == 3) {
+        bean.setShippingdate(new Timestamp(System.currentTimeMillis()));
+    } else if (deliverystatus == 0 || deliverystatus == 1 || deliverystatus == 2) {
+        bean.setShippingdate(null);
     }
-%>
 
+    int result = mapper.updateStatus(bean);
+    sqlSession.commit();
+    sqlSession.close();
+
+    if (result > 0) {
+%>
 <script>
-    alert("<%= updateResult ? "배송 상태가 성공적으로 변경되었습니다." : "배송 상태 변경에 실패했습니다." %>");
+    alert("배송 상태가 성공적으로 수정되었습니다.");
     location.href = "deliverymanager.jsp";
 </script>
+<%
+    } else {
+%>
+<script>
+    alert("배송 상태 수정에 실패했습니다.");
+    history.back();
+</script>
+<%
+    }
+%>
