@@ -37,7 +37,7 @@
 
 <table>
     <tr>
-        <th>재고 번호</th><th>상품 번호</th><th>상품명</th><th>수량</th><th>입고일</th><th>최근 수정일</th><th>상품 관리</th>
+        <th>재고 번호</th><th>상품 번호</th><th>상품명</th><th>수량</th><th>입고일</th><th>최근 수정일</th><th>재고 관리</th>
     </tr>
     <%
         ArrayList<StockDto> list;
@@ -60,7 +60,7 @@
         <td><%=dto.getProduct_quantity()%></td>
         <td><%=dto.getCreate_date().toString().substring(0,19)%></td>
         <td><%=dto.getLastmodified_date().toString().substring(0,19)%></td>
-        <td><a href="admin_stock_update.jsp?Stock=<%=dto.getStock_no()%>">상품 수정</a></td>
+        <td><a href="admin_stock_update.jsp?Stock=<%=dto.getStock_no()%>">재고 수정</a></td>
     </tr>
     <%
             }
