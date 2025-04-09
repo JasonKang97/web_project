@@ -10,7 +10,7 @@
     else if ("delete".equals(mode)) action = "qa_delete.jsp";
 %>
 
-<div class="qa-container">
+<div class="page-container">
     <h2>비밀번호 확인</h2>
 
     <!-- ✅ form 전송 시 자바스크립트 함수로 체크 -->
@@ -21,11 +21,11 @@
             <label for="postpassword">비밀번호</label>
             <input type="password" id="postpassword" name="postpassword" required>
         </div>
-
+        <br>
         <div class="qa-form-actions">
-            <button type="submit">확인</button>
-            <button type="button" onclick="history.back()">취소</button>
-            <button type="button" onclick="location.href='qa_list.jsp'">목록보기</button>
+            <input type="submit" value="확인">
+            <input type="button" onclick="history.back()" value="취소">
+            <input type="button" onclick="location.href='qa_list.jsp'" value="목록보기">
         </div>
     </form>
 </div>

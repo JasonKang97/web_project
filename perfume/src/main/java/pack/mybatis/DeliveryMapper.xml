@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pack.mybatis.DeliveryMapper">
+	<!-- 전체 배송 목록 조회 (관리자용) -->
+<select id="selectAll" resultType="pack.delivery.DeliveryBean">
+    SELECT 
+        d.ordernumber AS order_no,
+        d.usernumber AS usern_no,
+        d.trackingnumber,
+        d.deliverystatus,
+        d.shippingdate,
+        d.shpaddress,
+        d.shpdetailaddress,
+        c.username,
+        p.productname
+    FROM delivery d
+    JOIN orders o ON d.ordernumber = o.order_no
+    JOIN customer c ON o.user_no = c.user_no
+    JOIN product p ON o.product_no = p.product_no
+</select>
+
+<select id="selectOne" parameterType="int" resultType="pack.delivery.DeliveryBean">
+    SELECT 
+        d.ordernumber AS order_no,
+        d.usernumber AS usern_no,
+        d.trackingnumber,
+        d.deliverystatus,
+        d.shippingdate,
+        d.shpaddress,
+        d.shpdetailaddress,
+        c.username,
+        p.productname
+    FROM delivery d
+    JOIN orders o ON d.ordernumber = o.order_no
+    JOIN customer c ON o.user_no = c.user_no
+    JOIN product p ON o.product_no = p.product_no
+    WHERE d.ordernumber = #{ordernumber}
+</select>
+
+
+
+	<!-- 고객번호 기준으로 조회 (고객 마이페이지용) -->
+	<select id="selectByUser" parameterType="int"
+		resultType="pack.delivery.DeliveryBean">
+		SELECT d.*, c.username, p.productname
+		FROM delivery d
+		JOIN orders o ON d.ordernumber = o.order_no
+		JOIN customer c ON o.user_no = c.user_no
+		JOIN product p ON o.product_no = p.product_no
+		WHERE o.user_no = #{user_no}
+	</select>
+
+<update id="updateStatus" parameterType="pack.delivery.DeliveryBean">
+    UPDATE delivery
+    SET deliverystatus = #{deliverystatus},
+        shippingdate = #{shippingdate}
+    WHERE ordernumber = #{order_no}  <!-- ✅ 필드명 기준으로 수정 -->
+</update>
+
+
+
+</mapper>
+
+
+
