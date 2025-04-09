@@ -61,7 +61,7 @@
                 <td><%=dto.getProduct_name()%></td>
                 <td><%=dto.getTotal_price()%></td>
                 <td><%=dto.getQuantity()%></td>
-                <td><button type="button" class="detail-button">상세보기</button></td>
+                <td><a type="button" class="detail-button" href="../guest_product/guest_productdetail.jsp?product_no=<%=dto.getProduct_no()%>">상세보기</a></td>
             </tr>
             <%
                     }

@@ -31,7 +31,7 @@ if (userNo != null) {
 
 <!-- 사용자에게 보여주는 table (form 바깥) -->
 <table border="1">
-    <tr><td>아이디[ Email ]</td><td><%= dto.getEmail() %></td></tr>
+    <tr><td>아이디(Email)</td><td><%= dto.getEmail() %></td></tr>
     <tr><td>고객 이름</td><td><%= dto.getUsername() %></td></tr>
     <tr><td>성별</td><td><%= dto.getGender() %></td></tr>
     <tr><td>전화번호</td><td><%= dto.getPhonenumber() %></td></tr>

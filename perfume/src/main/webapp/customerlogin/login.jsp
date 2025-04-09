@@ -8,7 +8,7 @@ String id = (String)session.getAttribute("customerKey");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Odeur</title>
+<title>AromaDesk</title>
 <link rel="stylesheet" type="text/css" href="../css/login.css">
 <script type="text/javascript">
 
@@ -48,7 +48,7 @@ function funcNewMember(){
 <form name = "loginForm">
 	<table>
 	  <tr>
-	  	<td colspan="2" style="text-align: center;">* 회원 로그인 *</td>
+	  	<td colspan="2" style="text-align: center;">회원 로그인</td>
 	  </tr>
 	  <tr>
 	  	<td>아이디(E.mail)</td>

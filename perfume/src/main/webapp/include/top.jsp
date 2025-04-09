@@ -1,15 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
-  System.out.println(session.getAttribute("customerKey"));
   String sessionUser = (String) session.getAttribute("customerKey");
-  System.out.println(sessionUser);
   boolean isLoggedIn = (sessionUser != null);
 %>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Odeur</title>
+  <title>AromaDesk</title>
 
   <!-- Bootstrap + FontAwesome -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -24,7 +22,7 @@
 <header class="sticky-top bg-white shadow-sm z-3">
   <div class="container-fluid d-flex align-items-center justify-content-between py-3 px-4">
     <div class="d-none d-lg-block" style="width: 180px;"></div>
-    <div class="logo-area text-center flex-grow-1">Odeur</div>
+    <div class="logo-area text-center flex-grow-1">AromaDesk</div>
 
     <div class="d-flex align-items-center gap-4 header-icons">
       <i class="fa fa-search" onclick="toggleSearchBox()" title="검색"></i>

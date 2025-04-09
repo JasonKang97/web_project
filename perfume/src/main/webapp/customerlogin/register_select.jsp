@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Odeur 회원가입</title>
+<title>AromaDesk 회원가입</title>
 </head>
 <body>
 <h2 style="text-align: center;"></h2>

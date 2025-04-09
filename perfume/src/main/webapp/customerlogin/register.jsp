@@ -7,7 +7,7 @@ String membershiptype = request.getParameter("membershiptype");
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Odeur 회원가입</title>
+<title>AromaDesk 회원가입</title>
 <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
 <script src="../js/popup_2.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

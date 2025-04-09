@@ -36,7 +36,7 @@
 <c:forEach var="d" items="${deliveryList}">
 <tr>
     <td>${d.order_no}</td>
-    <td><a href="../guest/guest_productdetail.jsp?product_no=${d.order_no}" class="title-btn detail-button">${d.product_name}</a></td>
+    <td><a href="../guest_product/guest_productdetail.jsp?product_no=${d.product_no}" class="title-btn detail-button">${d.product_name}</a></td>
     <td>${d.order_quantity}</td>
     <td>${d.order_date}</td>
     <td>

@@ -24,7 +24,7 @@ public class CustomerDeliveryManager {
         List<CustomerDeliveryDto> list = new ArrayList<>();
         try {
             conn = ds.getConnection();
-            String sql = "SELECT o.order_no, p.productname, o.orderquantity, o.orderdate, " +
+            String sql = "SELECT o.order_no, p.productname, p.product_no, o.orderquantity, o.orderdate, " +
                          "d.deliverystatus, d.trackingnumber, d.shpaddress, d.shpdetailaddress " +
                          "FROM orders o " +
                          "JOIN delivery d ON o.order_no = d.ordernumber " +
@@ -38,6 +38,7 @@ public class CustomerDeliveryManager {
                 CustomerDeliveryDto dto = new CustomerDeliveryDto();
                 dto.setOrder_no(rs.getInt("order_no"));
                 dto.setProduct_name(rs.getString("productname"));
+                dto.setProduct_no(rs.getInt("product_no"));
                 dto.setOrder_quantity(rs.getInt("orderquantity"));
                 dto.setOrder_date(rs.getDate("orderdate"));
                 dto.setDeliverystatus(rs.getInt("deliverystatus"));
@@ -58,7 +59,7 @@ public class CustomerDeliveryManager {
         List<CustomerDeliveryDto> list = new ArrayList<>();
         try {
             conn = ds.getConnection();
-            String sql = "SELECT o.order_no, p.productname, o.orderquantity, o.orderdate, " +
+            String sql = "SELECT o.order_no, p.productname, p.product_no, o.orderquantity, o.orderdate, " +
                          "d.deliverystatus, d.trackingnumber, d.shpaddress, d.shpdetailaddress " +
                          "FROM orders o " +
                          "JOIN delivery d ON o.order_no = d.ordernumber " +

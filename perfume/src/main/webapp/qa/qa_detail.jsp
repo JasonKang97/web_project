@@ -16,18 +16,10 @@
 
   boolean isAdmin = "admin".equals(loginId);
   boolean isWriter = dto.getWriter().equals(loginId);
-
-  if (dto.getSecretYN() == 1 && !isAdmin) {
-    if (inputPw == null || !inputPw.equals(dto.getPostpassword())) {
 %>
-<script>
-  alert("비밀번호가 일치하지 않습니다.");
-  history.back();
-</script>
+
 <%
-      return;
-    }
-  }
+
 %>
 
 <div class="qa-container">

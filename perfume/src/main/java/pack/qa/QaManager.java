@@ -166,7 +166,7 @@ public class QaManager {
     public boolean checkPassword(int publishNo, String newPass) {
         boolean b = false;
         String sql = "SELECT postpassword FROM qa WHERE publish_no=?";
-
+        System.out.println("checkPassword nepass : " + newPass);
         try {
             conn = ds.getConnection();
             pstmt = conn.prepareStatement(sql);

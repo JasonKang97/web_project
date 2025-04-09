@@ -9,7 +9,7 @@ if (success) {
 %>
 <script>
 	alert("재고가 등록되었습니다.");
-	location.href = "admin_stock.jsp";
+	location.href = "../admin/admin_stock.jsp";
 </script>
 <%
 } else {

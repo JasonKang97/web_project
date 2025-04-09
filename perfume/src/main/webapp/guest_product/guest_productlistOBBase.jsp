@@ -16,7 +16,7 @@ request.setAttribute("list", list); // list를 request에 저장하여 JSTL에�
 
 
 <div>
-	<h2 class="section-title">상품목록</h2>
+	<h2 class="section-title">&nbsp;Base</h2>
 	<div class="product-grid">
 		<c:forEach var="product" items="${list}">
 			<div class="product-card">

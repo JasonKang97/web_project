@@ -29,7 +29,7 @@ public class UploadServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //업로드될 실제 경로 얻어내기
         String uploadPath = null;
-        uploadPath = "C:\\work\\intellij_web\\web_project\\src\\main\\webapp\\upload";
+        uploadPath = getServletContext().getRealPath("/upload");
         File uploadDir = new File(uploadPath);
         //만일 upload 폴더가 존재 하지 않으면
         if (!uploadDir.exists()) {

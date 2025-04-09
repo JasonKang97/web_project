@@ -8,6 +8,7 @@
     font-size: 0.95em;
     width: 100%;
     border-top: 1px solid #e0e0e0;
+    /* position 제거됨 */
   }
 
   .footer-inner {
@@ -28,6 +29,7 @@
     margin: 5px 0;
   }
 
+  /* sticky-footer-pusher 관련 요소 제거 가능 */
   .sticky-footer-pusher {
     height: 0;
   }
@@ -38,17 +40,10 @@
     min-height: 100vh;
     position: relative;
     box-sizing: border-box;
-    padding-bottom: 200px;
-  }
-
-  .footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    /* padding-bottom 제거 가능 */
   }
 </style>
 
-<div class="sticky-footer-pusher"></div>
 
 <div class="footer">
   <div class="footer-inner">

@@ -29,7 +29,7 @@ public class UpdateServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//업로드될 실제 경로 얻어내기
 		//String uploadPath=this.getServletContext().getRealPath("/upload");  // tomcat 기본 경로로 설치한 경우 
-		String uploadPath = "C:\\work\\intellij_web\\web_project\\src\\main\\webapp\\upload";
+		String uploadPath = getServletContext().getRealPath("/upload");
 		
 		File uploadDir = new File(uploadPath);
 		//만일 upload 폴더가 존재 하지 않으면 
